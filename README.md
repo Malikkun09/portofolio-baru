@@ -1,1 +1,58 @@
-# portofolio-baru
+# Muhammad Malik Fajar — portfolio
+
+A personal site for Malik, a Grade 11 PPLG student in Cimahi. Dark, terminal-leaning, and light on purpose: no WebGL, no video backgrounds. Pages are prerendered and ready for Vercel.
+
+## Edit the content
+
+All visitor-facing copy, projects, and links live in [`src/data/profile.ts`](src/data/profile.ts).
+
+1. Open that file.
+2. Search for `TODO`. Those are missing URLs or screenshots.
+3. A link with `href: null` shows a TODO marker on the site. Put a real URL in `href` when you have one.
+4. To replace a drawn project cover, add an image under `public/` (for example `public/projects/pkl.png`) and set `image: "/projects/pkl.png"`.
+
+The phone number should stay written as `+62 889-1983-723`.
+
+## Run it locally
+
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+```bash
+npm run build
+npm start
+```
+
+## The on-site terminal
+
+A **terminal** button sits in the header (Ctrl+K or Cmd+K). Commands:
+
+| Command | What it does |
+| --- | --- |
+| `help` | List commands |
+| `about` | Jump to the about section |
+| `projects` | Jump to selected work |
+| `work` | Open the full project index |
+| `history` | Jump to the journey |
+| `contact` | Jump to contact |
+| `ls` | List project slugs |
+| `open <slug>` | Open one project |
+| `whoami` | Print a short identity |
+| `links` | Print contact links |
+| `clear` | Clear the panel |
+
+`cat about.md`, `ls projects/`, and `./contact.sh` work as aliases.
+
+## Deploy on Vercel
+
+1. Push this repository to GitHub.
+2. In Vercel, choose **Add New… → Project** and import the repo.
+3. Framework preset: **Next.js**. Root directory: the repo root. No environment variables are required.
+4. Deploy. `npm run build` is the production build.
+5. To use **malikfajar.me**, open the project → **Settings → Domains**, add the domain, and point DNS at Vercel as the dashboard instructs.
+
+The home page, about page, project index, and each project page are statically prerendered.
