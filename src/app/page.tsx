@@ -48,7 +48,7 @@ export default function HomePage() {
             {profile.school} · {profile.location}
           </p>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed">{profile.copy.heroLead}</p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="rise mt-8 flex flex-wrap gap-3" style={{ ["--i" as string]: 0 }}>
             <a href="#projects" className={primaryButton}>
               View projects
             </a>
@@ -62,8 +62,12 @@ export default function HomePage() {
               ["school", profile.school],
               ["program", `${profile.grade} · ${profile.program}`],
               ["status", profile.statusLabel],
-            ].map(([label, value]) => (
-              <div key={label} className="bg-elev px-4 py-3">
+            ].map(([label, value], index) => (
+              <div
+                key={label}
+                className="rise bg-elev px-4 py-3"
+                style={{ ["--i" as string]: index + 1 }}
+              >
                 <dt className="font-mono text-xs text-accent">{label}</dt>
                 <dd className="mt-1 text-sm">{value}</dd>
               </div>
@@ -77,7 +81,7 @@ export default function HomePage() {
       </section>
 
       <section id="about" className="border-t border-line">
-        <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
+        <div data-reveal className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
           <CommandHeading command="cat about.md" title="About" />
           <p className="mt-6 max-w-2xl text-base leading-relaxed sm:text-lg">
             {profile.copy.aboutSnippet}
@@ -102,9 +106,13 @@ export default function HomePage() {
             </Link>
           </div>
           <p className="mt-4 max-w-2xl text-muted">{profile.copy.selectedNote}</p>
-          <ul className="mt-8 grid gap-4 md:grid-cols-2">
+          <ul data-stagger className="mt-8 grid gap-4 md:grid-cols-2">
             {featured.map((project, index) => (
-              <li key={project.slug} className={index === 0 ? "md:col-span-2" : undefined}>
+              <li
+                key={project.slug}
+                data-stagger-item
+                className={index === 0 ? "md:col-span-2" : undefined}
+              >
                 <ProjectCard project={project} feature={index === 0} />
               </li>
             ))}
@@ -113,7 +121,7 @@ export default function HomePage() {
       </section>
 
       <section id="contact" className="border-t border-line">
-        <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
+        <div data-reveal className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
           <CommandHeading command="./contact.sh" title="Contact" />
           <p className="mt-6 max-w-2xl text-base leading-relaxed sm:text-lg">
             {profile.copy.contactLead}

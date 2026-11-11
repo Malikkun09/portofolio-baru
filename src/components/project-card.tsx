@@ -13,10 +13,11 @@ export function ProjectCard({
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className={`group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-elev hover:border-accent motion-safe:transition-colors ${
+      className={`project-card group relative flex h-full flex-col overflow-hidden rounded-lg border border-line bg-elev hover:border-accent ${
         feature ? "md:grid md:grid-cols-[1.15fr_1fr]" : ""
       }`}
     >
+      <span aria-hidden="true" className="card-glow pointer-events-none absolute inset-0 z-10 rounded-lg" />
       <div
         aria-hidden="true"
         className={`relative bg-[#0c100e] ${

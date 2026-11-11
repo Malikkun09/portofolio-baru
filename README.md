@@ -56,3 +56,9 @@ A **terminal** button sits in the header (Ctrl+K or Cmd+K). Commands:
 5. To use **malikfajar.me**, open the project → **Settings → Domains**, add the domain, and point DNS at Vercel as the dashboard instructs.
 
 The home page, about page, project index, and each project page are statically prerendered.
+
+## Motion
+
+Scroll reveals, the journey line, and the command-line decode use GSAP and ScrollTrigger. That code loads in its own chunk after the page is up. Route changes and the terminal panel use Motion: a short scan-line wipe between pages, and a scale/fade when the terminal opens. Cards lift and pick up a green edge on hover. Buttons nudge slightly toward the pointer on a fine mouse.
+
+If the system asks for reduced motion, those effects stay off: no scanlines, no decode, no scroll movement. The copy stays in place.

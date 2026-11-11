@@ -21,9 +21,9 @@ export default function ProjectsPage() {
       </p>
 
       <h2 className="mt-12 font-mono text-sm text-accent">work/</h2>
-      <ul className="mt-4 grid gap-4 md:grid-cols-2">
+      <ul data-stagger className="mt-4 grid gap-4 md:grid-cols-2">
         {work.map((project) => (
-          <li key={project.slug}>
+          <li key={project.slug} data-stagger-item>
             <ProjectCard project={project} />
           </li>
         ))}
@@ -32,9 +32,9 @@ export default function ProjectsPage() {
       <h2 id="experiments" className="mt-14 font-mono text-sm text-accent">
         experiments/
       </h2>
-      <ul className="mt-4 grid gap-4 md:grid-cols-2">
+      <ul data-stagger className="mt-4 grid gap-4 md:grid-cols-2">
         {experiments.map((project) => (
-          <li key={project.slug}>
+          <li key={project.slug} data-stagger-item>
             <ProjectCard project={project} />
           </li>
         ))}

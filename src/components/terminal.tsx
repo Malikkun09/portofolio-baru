@@ -1,5 +1,6 @@
 "use client";
 
+import { motion, useReducedMotion } from "motion/react";
 import { useRouter } from "next/navigation";
 import {
   useEffect,
@@ -25,6 +26,7 @@ export function Terminal({
   inputRef: RefObject<HTMLInputElement | null>;
 }) {
   const router = useRouter();
+  const reduce = useReducedMotion();
   const titleId = useId();
   const logRef = useRef<HTMLDivElement>(null);
   const seq = useRef(1);
@@ -111,12 +113,25 @@ export function Terminal({
   }
 
   return (
-    <div
+    <motion.div
       id="site-terminal"
       role="dialog"
       aria-modal="false"
       aria-labelledby={titleId}
-      className={`${open ? "flex" : "hidden"} fixed inset-x-3 bottom-3 z-40 h-[min(33rem,72dvh)] flex-col overflow-hidden rounded-lg border border-line bg-elev shadow-[0_16px_48px_rgba(0,0,0,0.45)] sm:inset-x-auto sm:right-4 sm:w-[28rem]`}
+      aria-hidden={!open}
+      inert={!open}
+      initial={false}
+      animate={{
+        opacity: open ? 1 : 0,
+        y: open ? 0 : 16,
+        scale: open ? 1 : 0.985,
+      }}
+      transition={{
+        duration: reduce ? 0 : 0.28,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      style={{ transformOrigin: "100% 100%" }}
+      className={`${open ? "" : "pointer-events-none opacity-0"} fixed inset-x-3 bottom-3 z-40 flex h-[min(33rem,72dvh)] origin-bottom-right flex-col overflow-hidden rounded-lg border border-line bg-elev shadow-[0_16px_48px_rgba(0,0,0,0.45)] sm:inset-x-auto sm:right-4 sm:w-[28rem]`}
     >
       <div className="flex items-center justify-between border-b border-line px-3">
         <p id={titleId} className="font-mono text-xs text-muted">
@@ -143,8 +158,8 @@ export function Terminal({
               line.text === ""
                 ? "h-2"
                 : line.kind === "in"
-                  ? "whitespace-pre-wrap text-accent"
-                  : "whitespace-pre-wrap text-fg"
+                  ? "term-line whitespace-pre-wrap text-accent"
+                  : "term-line whitespace-pre-wrap text-fg"
             }
           >
             {line.kind === "in" ? `> ${line.text}` : line.text}
@@ -172,6 +187,6 @@ export function Terminal({
           className="min-h-11 min-w-0 flex-1 bg-transparent font-mono text-base text-fg outline-none placeholder:text-muted"
         />
       </form>
-    </div>
+    </motion.div>
   );
 }

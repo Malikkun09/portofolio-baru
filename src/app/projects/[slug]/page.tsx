@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProjectCover } from "@/components/project-cover";
+import { ScrambleText } from "@/components/scramble-text";
 import { getProject, profile } from "@/data/profile";
 import { ghostButton } from "@/lib/styles";
 
@@ -41,7 +42,7 @@ export default async function ProjectPage({
       </Link>
       <p className="mt-8 font-mono text-sm">
         <span className="text-muted">{profile.prompt}:~$ </span>
-        <span className="text-accent">cat projects/{project.slug}.md</span>
+        <ScrambleText text={`cat projects/${project.slug}.md`} className="text-accent" />
       </p>
       <h1 className="mt-3 text-[clamp(2rem,5vw,3.25rem)] leading-[1.08] font-medium tracking-tight">
         {project.title}
@@ -54,7 +55,10 @@ export default async function ProjectPage({
       </p>
       <p className="mt-6 text-lg leading-relaxed">{project.summary}</p>
 
-      <div className="relative mt-8 aspect-[16/8] overflow-hidden rounded-lg border border-line bg-[#0c100e]">
+      <div
+        data-reveal
+        className="relative mt-8 aspect-[16/8] overflow-hidden rounded-lg border border-line bg-[#0c100e]"
+      >
         {project.image ? (
           <Image
             src={project.image}
@@ -74,16 +78,22 @@ export default async function ProjectPage({
         )}
       </div>
 
-      <div className="mt-8 space-y-4 text-base leading-relaxed">
+      <div data-stagger className="mt-8 space-y-4 text-base leading-relaxed">
         {project.description.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
+          <p key={paragraph} data-stagger-item>
+            {paragraph}
+          </p>
         ))}
       </div>
 
       <h2 className="mt-10 font-mono text-sm text-accent">notes</h2>
-      <ul className="mt-4 space-y-2">
+      <ul data-stagger className="mt-4 space-y-2">
         {project.highlights.map((item) => (
-          <li key={item} className="flex gap-3 text-sm leading-relaxed sm:text-base">
+          <li
+            key={item}
+            data-stagger-item
+            className="flex gap-3 text-sm leading-relaxed sm:text-base"
+          >
             <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true" />
             <span>{item}</span>
           </li>

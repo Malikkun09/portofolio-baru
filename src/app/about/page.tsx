@@ -16,17 +16,29 @@ export default function AboutPage() {
     <>
       <div className="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-20">
         <CommandHeading as="h1" command="cat about.md" title="About" />
-        <div className="mt-8 max-w-2xl space-y-5 text-base leading-relaxed sm:text-lg">
+        <div
+          data-stagger
+          className="mt-8 max-w-2xl space-y-5 text-base leading-relaxed sm:text-lg"
+        >
           {profile.copy.aboutParagraphs.slice(0, 2).map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
+            <p key={paragraph} data-stagger-item>
+              {paragraph}
+            </p>
           ))}
         </div>
 
         <h2 className="mt-12 font-mono text-sm text-accent">lanes</h2>
         <p className="mt-3 max-w-2xl text-muted">{profile.copy.lanesIntro}</p>
-        <dl className="mt-4 max-w-3xl divide-y divide-line border-y border-line">
+        <dl
+          data-stagger
+          className="mt-4 max-w-3xl divide-y divide-line border-y border-line"
+        >
           {profile.lanes.map((lane) => (
-            <div key={lane.id} className="grid gap-1 py-4 sm:grid-cols-[8.5rem_1fr] sm:gap-6">
+            <div
+              key={lane.id}
+              data-stagger-item
+              className="grid gap-1 py-4 sm:grid-cols-[8.5rem_1fr] sm:gap-6"
+            >
               <dt className="font-mono text-sm text-fg">{lane.label}</dt>
               <dd className="text-sm leading-relaxed sm:text-base">{lane.detail}</dd>
             </div>
@@ -40,9 +52,9 @@ export default function AboutPage() {
             <span>timeline</span>
             <span>00 — 02</span>
           </div>
-          <ol className="grid gap-6 px-4 py-5 sm:grid-cols-3">
+          <ol data-stagger className="grid gap-6 px-4 py-5 sm:grid-cols-3">
             {profile.benches.map((bench, index) => (
-              <li key={bench.label} className="relative">
+              <li key={bench.label} data-stagger-item className="relative">
                 <span className="mb-3 block h-2 w-2 rounded-full bg-accent" aria-hidden="true" />
                 <p className="font-mono text-xs text-muted">0{index}</p>
                 <p className="mt-1 font-medium">{bench.label}</p>

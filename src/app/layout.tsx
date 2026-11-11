@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
+import { MotionLoader } from "@/components/motion-loader";
 import { Shell } from "@/components/shell";
 import { SiteFooter } from "@/components/site-footer";
 import { profile } from "@/data/profile";
@@ -95,9 +97,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${sans.variable} ${mono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-bg font-sans text-fg">
+        <Script id="motion-class" strategy="beforeInteractive">
+          {`try{if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("motion")}catch(e){}`}
+        </Script>
         <a href="#content" className="skip-link">
           Skip to content
         </a>
+        <MotionLoader />
         <Shell />
         <main id="content" className="relative z-[1] flex-1">
           {children}

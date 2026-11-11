@@ -1,3 +1,4 @@
+import { ScrambleText } from "@/components/scramble-text";
 import { profile } from "@/data/profile";
 
 export function CommandHeading({
@@ -13,7 +14,7 @@ export function CommandHeading({
     <header>
       <p className="font-mono text-sm">
         <span className="text-muted">{profile.prompt}:~$ </span>
-        <span className="text-accent">{command}</span>
+        <ScrambleText text={command} className="text-accent" />
       </p>
       <Tag
         className={`mt-3 font-medium tracking-tight ${

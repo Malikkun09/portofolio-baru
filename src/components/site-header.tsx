@@ -76,7 +76,7 @@ export function SiteHeader({
         <button
           ref={toggleRef}
           type="button"
-          className="col-start-2 row-start-1 inline-flex min-h-11 items-center gap-2 rounded-md border border-line px-3 font-mono text-sm text-fg hover:border-accent sm:col-start-3"
+          className="magnetic col-start-2 row-start-1 inline-flex min-h-11 items-center gap-2 rounded-md border border-line px-3 font-mono text-sm text-fg hover:border-accent motion-safe:transition-colors sm:col-start-3"
           aria-expanded={open}
           aria-controls="site-terminal"
           onClick={onToggle}
