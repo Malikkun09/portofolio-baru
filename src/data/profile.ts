@@ -93,11 +93,12 @@ export const profile = {
       "I learn by building websites, interfaces, systems, and visual experiments. I am still in school, and the work already has to hold up outside a class assignment.",
     aboutSnippet:
       "Most of my hours sit in a terminal, a Figma file, or an animation timeline. I study at SMK Informatika Fithrah Insani in Cimahi, Grade 11, PPLG. I want interfaces that feel designed: type, spacing, and states chosen for the job.",
-    aboutParagraphs: [
+    aboutLead: [
       "I am Muhammad Malik Fajar, a Grade 11 student in the PPLG program (Software and Game Development) at SMK Informatika Fithrah Insani in Cimahi. On formal work I sign Muhammad Malik Fajar El Syarif.",
       "The program started in 2024 with HTML, CSS, JavaScript, and interface design. I still use that base. The difference now is that a project may have a deploy target, a test suite, or someone waiting on the stock count.",
-      "I am looking for an internship on a real product, with people who will review the code and the design. Collaboration, and a small number of side projects, are open when the scope is written down.",
     ],
+    aboutClose:
+      "I am looking for an internship on a real product, with people who will review the code and the design. Collaboration, and a small number of side projects, are open when the scope is written down.",
     lanesIntro:
       "Five lanes show up in that work. They share a page because the same project often needs more than one of them.",
     benchIntro:

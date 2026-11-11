@@ -1,9 +1,9 @@
 import { ImageResponse } from "next/og";
+import { profile } from "@/data/profile";
 
 export const ogSize = { width: 1200, height: 630 };
 export const ogContentType = "image/png";
-export const ogAlt =
-  "Muhammad Malik Fajar, a Grade 11 PPLG student in Cimahi. The prompt reads whoami.";
+export const ogAlt = `${profile.name}, a ${profile.grade} ${profile.program} student in ${profile.location}. The prompt reads whoami.`;
 
 export function renderOg() {
   return new ImageResponse(
@@ -21,7 +21,7 @@ export function renderOg() {
         }}
       >
         <div style={{ display: "flex", color: "#3ddc97", fontSize: 28 }}>
-          malik@cimahi:~$ whoami
+          {profile.prompt}:~$ whoami
         </div>
         <div
           style={{
@@ -32,13 +32,13 @@ export function renderOg() {
             letterSpacing: -1,
           }}
         >
-          Muhammad Malik Fajar
+          {profile.name}
         </div>
         <div style={{ display: "flex", fontSize: 28, marginTop: 22, color: "#a3b2a9" }}>
-          Grade 11 · PPLG · Cimahi, Indonesia
+          {`${profile.grade} · ${profile.program} · ${profile.location}`}
         </div>
         <div style={{ display: "flex", marginTop: 48, fontSize: 24, color: "#3ddc97" }}>
-          open for internships
+          {profile.statusLabel}
         </div>
       </div>
     ),

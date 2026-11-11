@@ -4,7 +4,7 @@ A personal site for Malik, a Grade 11 PPLG student in Cimahi. Dark, terminal-lea
 
 ## Edit the content
 
-All visitor-facing copy, projects, and links live in [`src/data/profile.ts`](src/data/profile.ts).
+Profile copy, projects, and social links live in [`src/data/profile.ts`](src/data/profile.ts). Header labels and a few button labels live in the components that render them.
 
 1. Open that file.
 2. Search for `TODO`. Those are missing URLs or screenshots.
@@ -43,6 +43,7 @@ A **terminal** button sits in the header (Ctrl+K or Cmd+K). Commands:
 | `open <slug>` | Open one project |
 | `whoami` | Print a short identity |
 | `links` | Print contact links |
+| `home` | Go home |
 | `clear` | Clear the panel |
 
 `cat about.md`, `ls projects/`, and `./contact.sh` work as aliases.

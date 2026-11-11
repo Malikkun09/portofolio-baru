@@ -105,7 +105,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </a>
         <MotionLoader />
         <Shell />
-        <main id="content" className="relative z-[1] flex-1">
+        <main id="content" tabIndex={-1} className="relative z-[1] flex-1">
           {children}
         </main>
         <SiteFooter />

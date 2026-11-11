@@ -25,7 +25,7 @@ export function SiteFooter() {
             WhatsApp {profile.phone.display}
             <span className="sr-only"> (opens in a new tab)</span>
           </a>
-          {github?.href ? (
+          {github?.href && !github.todo ? (
             <a
               href={github.href}
               className="text-muted hover:text-accent"
@@ -35,7 +35,9 @@ export function SiteFooter() {
               GitHub {github.handle}
               <span className="sr-only"> (opens in a new tab)</span>
             </a>
-          ) : null}
+          ) : (
+            <span className="text-muted">GitHub · TODO</span>
+          )}
         </div>
       </div>
     </footer>

@@ -20,7 +20,7 @@ export default function AboutPage() {
           data-stagger
           className="mt-8 max-w-2xl space-y-5 text-base leading-relaxed sm:text-lg"
         >
-          {profile.copy.aboutParagraphs.slice(0, 2).map((paragraph) => (
+          {profile.copy.aboutLead.map((paragraph) => (
             <p key={paragraph} data-stagger-item>
               {paragraph}
             </p>
@@ -65,7 +65,7 @@ export default function AboutPage() {
         </div>
 
         <p className="mt-10 max-w-2xl text-base leading-relaxed sm:text-lg">
-          {profile.copy.aboutParagraphs[2]}
+          {profile.copy.aboutClose}
         </p>
         <Link href="/#contact" className={`${ghostButton} mt-6`}>
           Contact

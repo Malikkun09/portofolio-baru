@@ -36,7 +36,7 @@ export function SiteHeader({
       <div className="mx-auto grid max-w-5xl grid-cols-[1fr_auto] items-center gap-x-3 px-4 py-3 sm:grid-cols-[auto_1fr_auto] sm:px-6">
         <Link
           href="/"
-          aria-label="Home"
+          aria-label={`${profile.prompt}, home`}
           className="col-start-1 row-start-1 font-mono text-sm text-accent"
         >
           {profile.prompt}
@@ -57,7 +57,7 @@ export function SiteHeader({
               link.href === "/about"
                 ? route === "/about"
                 : link.href === "/projects"
-                  ? route.startsWith("/projects")
+                  ? route === "/projects" || route.startsWith("/projects/")
                   : false;
             return (
               <Link

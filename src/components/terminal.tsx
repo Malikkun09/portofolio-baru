@@ -103,6 +103,7 @@ export function Terminal({
     }
     if (event.key !== "ArrowUp" && event.key !== "ArrowDown") return;
     if (past.length === 0) return;
+    if (event.key === "ArrowDown" && cursor < 0) return;
     event.preventDefault();
     const next =
       event.key === "ArrowUp"

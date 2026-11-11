@@ -7,6 +7,7 @@
   --fg: #e7eee9;
   --muted: #a3b2a9;
   --accent: #3ddc97;
+  --accent-hover: #6af0b4;
   --ink: #042117;
   color-scheme: dark;
 }
@@ -18,6 +19,7 @@
   --color-fg: var(--fg);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
   --color-ink: var(--ink);
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
@@ -90,6 +92,10 @@ section[id] {
 
 .skip-link:focus {
   top: 1rem;
+}
+
+main:focus {
+  outline: none;
 }
 
 .boot-line {

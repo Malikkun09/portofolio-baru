@@ -1,4 +1,4 @@
-import { getProject, profile, type Project } from "@/data/profile";
+import { profile, type Project } from "@/data/profile";
 
 export type CommandResult = {
   lines: string[];
@@ -50,7 +50,7 @@ export function runCommand(raw: string): CommandResult {
   const cdProject = input.match(/^cd projects\/([a-z0-9-]+)\/?$/);
   if (cdProject) return openProject(cdProject[1]);
 
-  const normalized = ALIASES[input] ?? input;
+  const normalized = Object.hasOwn(ALIASES, input) ? ALIASES[input] : input;
   const [command, ...rest] = normalized.split(" ");
   const arg = rest.join(" ");
 
@@ -136,10 +136,6 @@ function openProject(arg: string): CommandResult {
   }
 
   if (matches.length === 0) {
-    const direct = getProject(query);
-    if (direct) {
-      return { lines: [`opening ${direct.slug}`], href: `/projects/${direct.slug}` };
-    }
     return {
       lines: [`no project matches "${arg}"`, "Type ls to see slugs."],
     };
