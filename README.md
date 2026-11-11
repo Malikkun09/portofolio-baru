@@ -62,4 +62,6 @@ The home page, about page, project index, and each project page are statically p
 
 Scroll reveals, the journey line, and the command-line decode use GSAP and ScrollTrigger. That code loads in its own chunk after the page is up. Route changes and the terminal panel use Motion: a short scan-line wipe between pages, and a scale/fade when the terminal opens. Cards lift and pick up a green edge on hover. Buttons nudge slightly toward the pointer on a fine mouse.
 
+The home hero plays a short intro once per session: a few named cursors assemble the headline, the stat panel, and the buttons, then leave. That sequence is its own chunk. It stays off for reduced motion, viewports under 768px, and machines with four cores or fewer. Skip with the skip control, Escape, or a click.
+
 If the system asks for reduced motion, those effects stay off: no scanlines, no decode, no scroll movement. The copy stays in place.

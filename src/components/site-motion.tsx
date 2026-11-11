@@ -1,11 +1,11 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
+import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { usePathname } from "next/navigation";
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+gsap.registerPlugin(ScrollTrigger);
 
 function reducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -14,9 +14,17 @@ function reducedMotion() {
 export function SiteMotion() {
   const pathname = usePathname();
 
-  useGSAP(
-    () => {
-      if (reducedMotion()) return;
+  useEffect(() => {
+    if (reducedMotion()) return;
+    let release = () => {};
+    let ctx: { revert: () => void } | null = null;
+    let cancelled = false;
+
+    let innerFrame = 0;
+    const frame = window.requestAnimationFrame(() => {
+      innerFrame = window.requestAnimationFrame(() => {
+        if (cancelled) return;
+        ctx = gsap.context(() => {
 
       gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((el) => {
         gsap.fromTo(
@@ -110,17 +118,22 @@ export function SiteMotion() {
         });
       }
 
-      return () => {
+      release = () => {
         alive = false;
         cleanups.forEach((fn) => fn());
       };
-    },
-    {
-      dependencies: [pathname],
-      scope: typeof document === "undefined" ? undefined : document.body,
-      revertOnUpdate: true,
-    },
-  );
+        }, document.body);
+      });
+    });
+
+    return () => {
+      cancelled = true;
+      window.cancelAnimationFrame(frame);
+      window.cancelAnimationFrame(innerFrame);
+      release();
+      ctx?.revert();
+    };
+  }, [pathname]);
 
   return null;
 }

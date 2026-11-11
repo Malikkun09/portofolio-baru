@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CommandHeading } from "@/components/command-heading";
+import { HeroSwarmLoader } from "@/components/hero-swarm-loader";
 import { Journey } from "@/components/journey";
 import { ProjectCard } from "@/components/project-card";
 import { featuredProjects, profile } from "@/data/profile";
@@ -17,14 +18,15 @@ export default function HomePage() {
 
   return (
     <>
-      <section className="relative overflow-hidden">
+      <section data-hero className="relative overflow-hidden">
+        <p className="sr-only">{profile.boot.join(". ")}</p>
         <div
+          data-swarm-piece="glow"
           className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-[radial-gradient(ellipse_at_top,rgba(61,220,151,0.09),transparent_62%)]"
           aria-hidden="true"
         />
-        <div className="relative mx-auto max-w-5xl px-4 pt-12 pb-16 sm:px-6 sm:pt-20 sm:pb-24">
-          <p className="sr-only">{profile.boot.join(". ")}</p>
-          <div aria-hidden="true">
+        <div className="hero-live relative mx-auto max-w-5xl px-4 pt-12 pb-16 sm:px-6 sm:pt-20 sm:pb-24">
+          <div data-swarm-piece="boot" aria-hidden="true">
             {profile.boot.map((line, index) => (
               <p
                 key={line}
@@ -37,18 +39,28 @@ export default function HomePage() {
               </p>
             ))}
           </div>
-          <h1 className="mt-6 max-w-4xl text-[clamp(2.45rem,8vw,4.4rem)] leading-[1.02] font-medium tracking-tight">
+          <h1
+            data-swarm-piece="headline"
+            data-swarm-text={profile.name}
+            className="mt-6 w-fit max-w-4xl text-[clamp(2.45rem,8vw,4.4rem)] leading-[1.02] font-medium tracking-tight"
+          >
             {profile.name}
             <span className="caret" aria-hidden="true" />
           </h1>
-          <p className="mt-5 text-lg text-muted">
-            {profile.grade} · {profile.program} · {profile.programLong}
-          </p>
-          <p className="mt-1 text-muted">
-            {profile.school} · {profile.location}
-          </p>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed">{profile.copy.heroLead}</p>
-          <div className="rise mt-8 flex flex-wrap gap-3" style={{ ["--i" as string]: 0 }}>
+          <div data-swarm-piece="copy">
+            <p className="mt-5 text-lg text-muted">
+              {profile.grade} · {profile.program} · {profile.programLong}
+            </p>
+            <p className="mt-1 text-muted">
+              {profile.school} · {profile.location}
+            </p>
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed">{profile.copy.heroLead}</p>
+          </div>
+          <div
+            data-swarm-piece="actions"
+            className="rise mt-8 flex flex-wrap gap-3"
+            style={{ ["--i" as string]: 0 }}
+          >
             <a href="#projects" className={primaryButton}>
               View projects
             </a>
@@ -56,7 +68,10 @@ export default function HomePage() {
               Contact
             </a>
           </div>
-          <dl className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+          <dl
+            data-swarm-piece="panel"
+            className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-4"
+          >
             {[
               ["location", profile.location],
               ["school", profile.school],
@@ -73,11 +88,12 @@ export default function HomePage() {
               </div>
             ))}
           </dl>
-          <p className="mt-6 font-mono text-sm text-muted">
+          <p data-swarm-piece="lanes" className="mt-6 font-mono text-sm text-muted">
             <span className="text-fg">lanes</span>
             <span> · {profile.lanes.map((lane) => lane.label).join(" · ")}</span>
           </p>
         </div>
+        <HeroSwarmLoader />
       </section>
 
       <section id="about" className="border-t border-line">

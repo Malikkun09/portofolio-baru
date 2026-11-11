@@ -11,6 +11,14 @@ export function SiteFooter() {
           <p className="mt-1 text-sm text-muted">
             {profile.location} · {profile.school}
           </p>
+          <a
+            href="https://califa.github.io/swarm-site/"
+            className="mt-3 inline-block max-w-sm text-xs text-muted hover:text-accent"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            Hero intro inspired by Swarm by Joel Califa
+          </a>
         </div>
         <div className="flex flex-col items-start gap-1 font-mono text-sm sm:items-end">
           <a
