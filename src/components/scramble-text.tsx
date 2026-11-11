@@ -26,52 +26,55 @@ export function ScrambleText({
     let tween: { kill: () => void } | null = null;
 
     void (async () => {
-      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
-        import("gsap"),
-        import("gsap/ScrollTrigger"),
-      ]);
-      if (!alive) return;
-      gsap.registerPlugin(ScrollTrigger);
-      const state = { p: 0 };
-      tween = gsap.to(state, {
-        p: 1,
-        duration: Math.min(0.95, 0.32 + text.length * 0.03),
-        ease: "none",
-        scrollTrigger: {
-          trigger: root,
-          start: "top 92%",
-          once: true,
-        },
-        onUpdate: () => {
-          const revealed = Math.floor(state.p * text.length);
-          let next = "";
-          for (let i = 0; i < text.length; i += 1) {
-            const ch = text[i];
-            if (
-              i < revealed ||
-              ch === " " ||
-              ch === "/" ||
-              ch === "." ||
-              ch === "-" ||
-              ch === "_"
-            ) {
-              next += ch;
-            } else {
-              next += GLYPHS[(Math.random() * GLYPHS.length) | 0];
+      try {
+        const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+          import("gsap"),
+          import("gsap/ScrollTrigger"),
+        ]);
+        if (!alive) return;
+        gsap.registerPlugin(ScrollTrigger);
+        const state = { p: 0 };
+        tween = gsap.to(state, {
+          p: 1,
+          duration: Math.min(0.95, 0.32 + text.length * 0.03),
+          ease: "none",
+          scrollTrigger: {
+            trigger: root,
+            start: "top 92%",
+            once: true,
+          },
+          onUpdate: () => {
+            const revealed = Math.floor(state.p * text.length);
+            let next = "";
+            for (let i = 0; i < text.length; i += 1) {
+              const ch = text[i];
+              if (
+                i < revealed ||
+                ch === " " ||
+                ch === "/" ||
+                ch === "." ||
+                ch === "-" ||
+                ch === "_"
+              ) {
+                next += ch;
+              } else {
+                next += GLYPHS[(Math.random() * GLYPHS.length) | 0];
+              }
             }
-          }
-          out.textContent = next;
-        },
-        onComplete: () => {
-          out.textContent = text;
-        },
-      });
+            out.textContent = next;
+          },
+          onComplete: () => {
+            out.textContent = text;
+          },
+        });
+      } catch {
+        if (alive) out.textContent = text;
+      }
     })();
 
     return () => {
       alive = false;
       tween?.kill();
-      out.textContent = text;
     };
   }, [text]);
 
