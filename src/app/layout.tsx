@@ -1,0 +1,125 @@
+import type { Metadata, Viewport } from "next";
+import { Geist, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
+import { MotionLoader } from "@/components/motion-loader";
+import { Shell } from "@/components/shell";
+import { SiteFooter } from "@/components/site-footer";
+import { profile } from "@/data/profile";
+import "./globals.css";
+
+const sans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const mono = JetBrains_Mono({
+  variable: "--font-jetbrains",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  metadataBase: new URL(profile.siteUrl),
+  title: {
+    default: profile.seo.title,
+    template: `%s — ${profile.name}`,
+  },
+  description: profile.seo.description,
+  applicationName: profile.name,
+  authors: [{ name: profile.name, url: profile.siteUrl }],
+  creator: profile.name,
+  keywords: [
+    "Muhammad Malik Fajar",
+    "Malik Fajar",
+    "PPLG",
+    "Cimahi",
+    "SMK Informatika Fithrah Insani",
+    "student developer",
+    "UI/UX",
+  ],
+  openGraph: {
+    type: "website",
+    locale: "en_ID",
+    url: profile.siteUrl,
+    siteName: profile.name,
+    title: profile.seo.title,
+    description: profile.seo.description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: profile.seo.title,
+    description: profile.seo.description,
+  },
+  robots: { index: true, follow: true },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#070908",
+  colorScheme: "dark",
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  alternateName: [profile.signature, profile.shortName],
+  url: profile.siteUrl,
+  jobTitle: "Software and Game Development student",
+  description: profile.seo.description,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Cimahi",
+    addressCountry: "ID",
+  },
+  alumniOf: {
+    "@type": "EducationalOrganization",
+    name: profile.school,
+  },
+  sameAs: profile.socials.flatMap((social) =>
+    social.href && !social.todo && social.id !== "whatsapp" ? [social.href] : [],
+  ),
+  knowsAbout: [
+    "Web development",
+    "UI/UX design",
+    "Machine learning",
+    "Game development",
+    "Laravel",
+    "React",
+  ],
+};
+
+export default function RootLayout({ children }: LayoutProps<"/">) {
+  return (
+    <html
+      lang="en"
+      className={`${sans.variable} ${mono.variable} h-full antialiased`}
+      suppressHydrationWarning
+    >
+      <body className="flex min-h-full flex-col bg-bg font-sans text-fg">
+        <Script id="motion-class" strategy="beforeInteractive">
+          {`try{if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("motion")}catch(e){}`}
+        </Script>
+        <Script id="swarm-gate" strategy="beforeInteractive">
+          {`(function(){try{if(location.pathname!=="/")return;if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;if(window.matchMedia("(max-width: 767px)").matches)return;var cores=navigator.hardwareConcurrency;if(cores&&cores<=4)return;if(sessionStorage.getItem("malik-hero-swarm"))return;sessionStorage.setItem("malik-hero-swarm","1");document.documentElement.classList.add("swarm-intro");window.__malikSwarmGate=setTimeout(function(){document.documentElement.classList.add("swarm-done")},9000);}catch(e){}})()`}
+        </Script>
+        <a href="#content" className="skip-link">
+          Skip to content
+        </a>
+        <MotionLoader />
+        <Shell />
+        <main id="content" tabIndex={-1} className="relative z-[1] flex-1">
+          {children}
+        </main>
+        <SiteFooter />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
+      </body>
+    </html>
+  );
+}
