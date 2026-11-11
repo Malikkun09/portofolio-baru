@@ -17,7 +17,6 @@ export function ProjectCard({
         feature ? "md:grid md:grid-cols-[1.15fr_1fr]" : ""
       }`}
     >
-      <span aria-hidden="true" className="card-glow pointer-events-none absolute inset-0 z-10 rounded-lg" />
       <div
         aria-hidden="true"
         className={`relative bg-[#0c100e] ${

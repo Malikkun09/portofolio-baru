@@ -5,10 +5,7 @@ export function SiteFooter() {
 
   return (
     <footer className="relative z-[1] border-t border-line">
-      <div
-        data-reveal
-        className="mx-auto flex max-w-5xl flex-col gap-4 px-4 py-8 sm:flex-row sm:items-end sm:justify-between sm:px-6"
-      >
+      <div className="mx-auto flex max-w-5xl flex-col gap-4 px-4 py-8 sm:flex-row sm:items-end sm:justify-between sm:px-6">
         <div>
           <p className="font-medium">{profile.signature}</p>
           <p className="mt-1 text-sm text-muted">

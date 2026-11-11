@@ -94,8 +94,9 @@ section[id] {
   top: 1rem;
 }
 
-main:focus {
-  outline: none;
+main:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 .boot-line {
@@ -151,27 +152,9 @@ html.motion .rise {
   }
 }
 
-html.motion:not(.motion-ready) [data-reveal],
-html.motion:not(.motion-ready) [data-stagger-item] {
-  opacity: 0;
-  transform: translateY(1.25rem);
-  animation: motion-fallback 0.01s linear 3.2s forwards;
-}
-
-html.motion:not(.motion-ready) [data-timeline-line] {
-  transform: scaleY(0);
-}
-
 html.motion [data-timeline-line] {
   transform-origin: top center;
   will-change: transform;
-}
-
-@keyframes motion-fallback {
-  to {
-    opacity: 1;
-    transform: none;
-  }
 }
 
 html.motion .term-line {
@@ -198,18 +181,9 @@ html.motion .term-line {
 
   .project-card:hover {
     transform: translateY(-4px);
-  }
-
-  .card-glow {
-    opacity: 0;
     box-shadow:
       inset 0 0 0 1px rgba(61, 220, 151, 0.7),
       0 18px 40px rgba(61, 220, 151, 0.1);
-    transition: opacity 0.45s ease;
-  }
-
-  .project-card:hover .card-glow {
-    opacity: 1;
   }
 }
 

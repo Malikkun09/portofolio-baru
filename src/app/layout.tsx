@@ -95,6 +95,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${sans.variable} ${mono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col bg-bg font-sans text-fg">
         <Script id="motion-class" strategy="beforeInteractive">

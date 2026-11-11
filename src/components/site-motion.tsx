@@ -7,8 +7,6 @@ import { usePathname } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*";
-
 function reducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
@@ -18,10 +16,7 @@ export function SiteMotion() {
 
   useGSAP(
     () => {
-      document.documentElement.classList.add("motion-ready");
       if (reducedMotion()) return;
-
-      const jobs: Array<{ el: HTMLElement; final: string }> = [];
 
       gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((el) => {
         gsap.fromTo(
@@ -81,47 +76,6 @@ export function SiteMotion() {
         );
       });
 
-      gsap.utils.toArray<HTMLElement>("[data-scramble]").forEach((node) => {
-        const out = node.querySelector<HTMLElement>("[data-scramble-out]");
-        const final = node.dataset.scramble ?? "";
-        if (!out || final.length === 0) return;
-        jobs.push({ el: out, final });
-        const state = { p: 0 };
-        gsap.to(state, {
-          p: 1,
-          duration: Math.min(0.95, 0.32 + final.length * 0.03),
-          ease: "none",
-          scrollTrigger: {
-            trigger: node,
-            start: "top 92%",
-            once: true,
-          },
-          onUpdate: () => {
-            const revealed = Math.floor(state.p * final.length);
-            let next = "";
-            for (let i = 0; i < final.length; i += 1) {
-              const ch = final[i];
-              if (
-                i < revealed ||
-                ch === " " ||
-                ch === "/" ||
-                ch === "." ||
-                ch === "-" ||
-                ch === "_"
-              ) {
-                next += ch;
-              } else {
-                next += GLYPHS[(Math.random() * GLYPHS.length) | 0];
-              }
-            }
-            out.textContent = next;
-          },
-          onComplete: () => {
-            out.textContent = final;
-          },
-        });
-      });
-
       let alive = true;
       document.fonts?.ready.then(() => {
         if (alive) ScrollTrigger.refresh();
@@ -159,9 +113,6 @@ export function SiteMotion() {
       return () => {
         alive = false;
         cleanups.forEach((fn) => fn());
-        jobs.forEach(({ el, final }) => {
-          el.textContent = final;
-        });
       };
     },
     {
