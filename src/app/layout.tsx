@@ -102,7 +102,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {`try{if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("motion")}catch(e){}`}
         </Script>
         <Script id="swarm-gate" strategy="beforeInteractive">
-          {`(function(){try{if(location.pathname!=="/")return;if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;if(window.matchMedia("(max-width: 767px)").matches)return;var cores=navigator.hardwareConcurrency;if(cores&&cores<=4)return;if(sessionStorage.getItem("malik-hero-swarm"))return;sessionStorage.setItem("malik-hero-swarm","1");document.documentElement.classList.add("swarm-intro");setTimeout(function(){document.documentElement.classList.add("swarm-done")},9000);}catch(e){}})()`}
+          {`(function(){try{if(location.pathname!=="/")return;if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;if(window.matchMedia("(max-width: 767px)").matches)return;var cores=navigator.hardwareConcurrency;if(cores&&cores<=4)return;if(sessionStorage.getItem("malik-hero-swarm"))return;sessionStorage.setItem("malik-hero-swarm","1");document.documentElement.classList.add("swarm-intro");window.__malikSwarmGate=setTimeout(function(){document.documentElement.classList.add("swarm-done")},9000);}catch(e){}})()`}
         </Script>
         <a href="#content" className="skip-link">
           Skip to content

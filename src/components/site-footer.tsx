@@ -18,6 +18,7 @@ export function SiteFooter() {
             rel="noreferrer noopener"
           >
             Hero intro inspired by Swarm by Joel Califa
+            <span className="sr-only"> (opens in a new tab)</span>
           </a>
         </div>
         <div className="flex flex-col items-start gap-1 font-mono text-sm sm:items-end">

@@ -192,6 +192,7 @@ html.swarm-intro:not(.swarm-done) [data-swarm-piece] {
 }
 
 html.swarm-intro:not(.swarm-done) .hero-live {
+  visibility: hidden;
   pointer-events: none;
 }
 
@@ -322,6 +323,7 @@ html.swarm-intro:not(.swarm-done) .swarm-stage {
   }
 
   html.swarm-intro:not(.swarm-done) .hero-live {
+    visibility: visible;
     pointer-events: auto;
   }
 

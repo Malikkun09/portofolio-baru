@@ -3,11 +3,22 @@
 import { useEffect } from "react";
 
 let played = false;
+let mounted = false;
+
+type SwarmWindow = Window & { __malikSwarmGate?: number };
+
+function clearGate() {
+  const gate = (window as SwarmWindow).__malikSwarmGate;
+  if (gate === undefined) return;
+  window.clearTimeout(gate);
+  delete (window as SwarmWindow).__malikSwarmGate;
+}
 
 function revealHero() {
   document.documentElement.classList.add("swarm-done");
   document.querySelectorAll<HTMLElement>("[data-swarm-piece]").forEach((el) => {
     el.style.removeProperty("opacity");
+    el.style.removeProperty("visibility");
     el.style.removeProperty("transform");
     el.style.removeProperty("translate");
   });
@@ -22,6 +33,7 @@ function blocked() {
 
 export function HeroSwarmLoader() {
   useEffect(() => {
+    clearGate();
     const root = document.documentElement;
     if (played || blocked() || !root.classList.contains("swarm-intro")) {
       if (root.classList.contains("swarm-intro")) revealHero();
@@ -74,13 +86,17 @@ export function HeroSwarmLoader() {
     const hardStop = window.setTimeout(end, 8000);
 
     let cancelled = false;
-    void import("@/components/hero-swarm").then((mod) => {
-      if (cancelled || ended) return;
-      stop = mod.mountHeroSwarm(stage);
-    });
+    mounted = true;
+    void import("@/components/hero-swarm")
+      .then((mod) => {
+        if (cancelled || ended) return;
+        stop = mod.mountHeroSwarm(stage);
+      })
+      .catch(() => end());
 
     return () => {
       cancelled = true;
+      mounted = false;
       window.clearTimeout(watchdog);
       window.clearTimeout(hardStop);
       window.removeEventListener("swarm:skip", onSkip);
@@ -89,7 +105,11 @@ export function HeroSwarmLoader() {
       window.removeEventListener("keydown", onKey);
       hero.removeEventListener("pointerdown", onPointer);
       stop();
-      if (started && !root.classList.contains("swarm-done")) revealHero();
+      queueMicrotask(() => {
+        if (mounted) return;
+        played = true;
+        revealHero();
+      });
     };
   }, []);
 

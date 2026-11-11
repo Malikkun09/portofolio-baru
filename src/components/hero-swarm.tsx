@@ -213,7 +213,7 @@ function SwarmPlay() {
         );
       });
 
-      tl.to(boot, { opacity: 1, duration: 0.28 }, 0.34);
+      tl.to(boot, { opacity: 1, visibility: "visible", duration: 0.28 }, 0.34);
 
       const marquee = { s: 0.02 };
       tl.to(
@@ -239,7 +239,7 @@ function SwarmPlay() {
         },
         0.48,
       );
-      tl.to(panel, { opacity: 1, duration: 0.26 }, 1.14);
+      tl.to(panel, { opacity: 1, visibility: "visible", duration: 0.26 }, 1.14);
       tl.to([box, badge], { opacity: 0, duration: 0.2 }, 1.16);
       tl.to(
         figma,
@@ -285,7 +285,7 @@ function SwarmPlay() {
         },
         1.5,
       );
-      tl.to(headline, { opacity: 1, duration: 0.22 }, 2.3);
+      tl.to(headline, { opacity: 1, visibility: "visible", duration: 0.22 }, 2.3);
       tl.to([frame, draft], { opacity: 0, duration: 0.18 }, 2.3);
       tl.call(() => {
         editor.dataset.tool = "point";
@@ -312,7 +312,7 @@ function SwarmPlay() {
       tl.fromTo(
         copy,
         { y: 12, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.28, ease: "power4.out" },
+        { y: 0, opacity: 1, visibility: "visible", duration: 0.28, ease: "power4.out" },
         3.22,
       );
       tl.to([ruler, rulerLabel], { opacity: 0, duration: 0.2 }, 3.48);
@@ -339,7 +339,7 @@ function SwarmPlay() {
         },
         3.24,
       );
-      tl.to(actions, { opacity: 1, duration: 0.22 }, 3.64);
+      tl.to(actions, { opacity: 1, visibility: "visible", duration: 0.22 }, 3.64);
       tl.to([origin, ghost, alt], { opacity: 0, duration: 0.16 }, 3.66);
 
       const nestX = head.x + Math.min(head.w, 240) * 0.28;
@@ -368,7 +368,7 @@ function SwarmPlay() {
           4.04,
         );
       });
-      tl.to(lanes, { opacity: 1, duration: 0.28 }, 3.86);
+      tl.to(lanes, { opacity: 1, visibility: "visible", duration: 0.28 }, 3.86);
       tl.to(glow, { opacity: 1, duration: 0.36 }, 3.82);
 
       window.dispatchEvent(new Event("swarm:start"));
